@@ -64,6 +64,7 @@ func (app *application) createSnippet(w http.ResponseWriter, r *http.Request) {
 
 	if !form.Valid() {
 		app.render(w, r, "create.page.tmpl", &templateData{Form: form})
+		return
 	}
 
 	id, err := app.snippets.Insert(form.Get("title"), form.Get("content"), form.Get("expires"))
@@ -71,6 +72,8 @@ func (app *application) createSnippet(w http.ResponseWriter, r *http.Request) {
 		app.serverError(w, err)
 		return
 	}
+
+	app.session.Put(r, "flash", "Snippet successfully created!")
 
 	http.Redirect(w, r, fmt.Sprintf("/snippet/%d", id), http.StatusSeeOther)
 }
