@@ -5,11 +5,13 @@ import (
 	"text/template"
 	"time"
 
+	"iden69.net/snippetbox/pkg/forms"
 	"iden69.net/snippetbox/pkg/models"
 )
 
 type templateData struct {
 	CurrentYear int
+	Form        *forms.Form
 	Snippet     *models.Snippet
 	Snippets    []*models.Snippet
 }
