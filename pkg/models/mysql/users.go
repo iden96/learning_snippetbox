@@ -114,7 +114,7 @@ func (m *UserModel) ChangePassword(id int, currentPassword, newPassword string) 
 		return err
 	}
 
-	newHashedPassword, err := bcrypt.GenerateFromPassword([]byte(currentPassword), 12)
+	newHashedPassword, err := bcrypt.GenerateFromPassword([]byte(newPassword), 12)
 	if err != nil {
 		return err
 	}
